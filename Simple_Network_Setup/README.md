@@ -64,5 +64,5 @@ Part 2: Configure End Devices and Verify Connectivity
 
 ---
 
-• Notes
+• Notes:
   This lab was completed as part of my Cisco Networking Academy studies to reinforce practical networking concepts such as device connectivity, DHCP, and end-device configuration.
