@@ -4,7 +4,7 @@
   This project demonstrates how to design, segment, and secure a small enterprise network using Cisco Packet Tracer.
   The setup includes VLAN creation, inter-VLAN routing , static IP addressing, and ACL-based security policies.
 
-• Phase 1: Building and Segmenting the Network
+# Phase 1: Building and Segmenting the Network
   
   Objectives
   
@@ -25,7 +25,7 @@
   configure terminal
   hostname CoreSwitch
   
-  # Create VLANs
+  • Create VLANs
   vlan 10
    name IT_Support
   vlan 20
@@ -33,7 +33,7 @@
   vlan 30
    name Guest
   
-  # Assign ports to VLANs
+  • Assign ports to VLANs
   interface range Fa0/2 - 3
    switchport mode access
    switchport access vlan 10
@@ -46,16 +46,16 @@
    switchport mode access
    switchport access vlan 30
   
-  # Configure trunk to router
+  • Configure trunk to router
   interface Fa0/1
    switchport mode trunk
   
   end
   copy running-config startup-config
 
-• Phase 2: Router-on-a-Stick Configuration
+# Phase 2: Router-on-a-Stick Configuration
   
-  Objectives
+  • Objectives
   
   Configure router sub-interfaces for inter-VLAN routing
   
@@ -68,39 +68,39 @@
   configure terminal
   hostname CoreRouter
   
-  # Enable main interface
+  • Enable main interface
   interface GigabitEthernet0/0
    no shutdown
   exit
   
-  # VLAN 10 Gateway
-  interface GigabitEthernet0/0.10
-   encapsulation dot1Q 10
-   ip address 192.168.10.1 255.255.255.0
+  • VLAN 10 Gateway
+    interface GigabitEthernet0/0.10
+     encapsulation dot1Q 10
+     ip address 192.168.10.1 255.255.255.0
+    
+  • VLAN 20 Gateway
+    interface GigabitEthernet0/0.20
+     encapsulation dot1Q 20
+     ip address 192.168.20.1 255.255.255.0
   
-  # VLAN 20 Gateway
-  interface GigabitEthernet0/0.20
-   encapsulation dot1Q 20
-   ip address 192.168.20.1 255.255.255.0
-  
-  # VLAN 30 Gateway
-  interface GigabitEthernet0/0.30
-   encapsulation dot1Q 30
-   ip address 192.168.30.1 255.255.255.0
+  • VLAN 30 Gateway
+    interface GigabitEthernet0/0.30
+     encapsulation dot1Q 30
+     ip address 192.168.30.1 255.255.255.0
   
   end
   copy running-config startup-config
 
-PC IP Configuration
-VLAN	PCs	Example IPs	Gateway
-10	PC1, PC2	192.168.10.11 / 192.168.10.12	192.168.10.1
-20	PC3, PC4	192.168.20.11 / 192.168.20.12	192.168.20.1
-30	PC5, PC6	192.168.30.11 / 192.168.30.12	192.168.30.1
+• PC IP Configuration
+  VLAN	PCs	Example IPs	Gateway
+  10	PC1, PC2	192.168.10.11 / 192.168.10.12	192.168.10.1
+  20	PC3, PC4	192.168.20.11 / 192.168.20.12	192.168.20.1
+  30	PC5, PC6	192.168.30.11 / 192.168.30.12	192.168.30.1
 
-Verification:
-Ping across VLANs (to confirm inter-VLAN routing is working.
+• Verification:
+  Ping across VLANs (to confirm inter-VLAN routing is working.
 
-• Phase 3: Security Policy (ACL Implementation)
+# Phase 3: Security Policy (ACL Implementation)
   Objective
   
   Block all traffic from the Guest VLAN (30) to the IT Support VLAN (10) while allowing all other communication.
@@ -111,19 +111,19 @@ Ping across VLANs (to confirm inter-VLAN routing is working.
    deny 192.168.30.0 0.0.0.255
    permit any
   
-  # Apply inbound on VLAN 10 sub-interface
+  • Apply inbound on VLAN 10 sub-interface
   interface GigabitEthernet0/0.10
    ip access-group BLOCK_GUEST_TO_IT in
   end
   
   
-  Verification:
+  • Verification:
   
   Ping from VLAN 30 (Guest) → VLAN 10 (IT Support) should fail.
   
   Pings between VLAN 20 and VLAN 10 should succeed.
   
-  Key Learnings:
+ # Key Learnings:
   
   VLAN segmentation improves network organization and security.
   
