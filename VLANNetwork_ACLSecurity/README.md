@@ -1,4 +1,4 @@
-VLAN configuration, Inter-VLAN Routing and ACL Security Policy Lab
+# VLAN configuration, Inter-VLAN Routing and ACL Security Policy Lab
 
 • Overview
   This project demonstrates how to design, segment, and secure a small enterprise network using Cisco Packet Tracer.
